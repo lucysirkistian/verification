@@ -546,8 +546,7 @@ app.post("/add-document", (req, res, next) => {
             }
         } else {
             console.log("🔎 Adding a new document.");
-            const lastDocQuery = "SELECT doc_number FROM documents WHERE doc_number LIKE 'E937028538-43-%' ORDER BY id DESC LIMIT 1";
-            const lastDocResult = await pool.query(lastDocQuery);
+            const lastDocQuery = "SELECT doc_number FROM documents WHERE doc_number LIKE 'E937028538-43-%' ORDER BY doc_number DESC LIMIT 1";            const lastDocResult = await pool.query(lastDocQuery);
             let lastNumber = 0;
             if (lastDocResult.rows.length > 0) {
                 const lastDocNumberStr = lastDocResult.rows[0].doc_number;
