@@ -572,7 +572,14 @@ app.post("/add-document", (req, res, next) => {
                 file_url, 
                 verify_token
             ]);
-            res.status(200).send(`Document added successfully! Document Number: ${new_doc_number}, Token: ${verify_token}`);
+            const verifyUrl = `${process.env.PUBLIC_BASE_URL.replace(/\/+$/, "")}/verify/${verify_token}`;
+
+            res.status(201).json({
+                message: "Document added successfully!",
+                document_number: new_doc_number,
+                token: verify_token,
+                verification_url: verifyUrl
+            });
         }
     } catch (error) {
         console.error("❌ Error adding/updating document:", error);
